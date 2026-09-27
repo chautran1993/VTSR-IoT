@@ -1,0 +1,3 @@
+model,size_mb,n_frames,latency_mean_ms,latency_median_ms,latency_p95_ms,fps_mean
+best.pt,22.56,20,43.28,39.01,57.2,23.11
+best_320.onnx,44.71,20,28.37,28.3,31.08,35.25

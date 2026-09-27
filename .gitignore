@@ -1,0 +1,26 @@
+# Môi trường ảo
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Dữ liệu và kết quả huấn luyện (dung lượng lớn, không đưa lên Git)
+dataset/
+data/
+runs/
+*.cache
+
+# Mô hình đã xuất (tái tạo được bằng export_onnx.py)
+*.onnx
+*.engine
+
+# Kết quả đo và ảnh xuất tạm
+outputs/
+*.avi
+*.mp4
+
+# Hệ điều hành / IDE
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
