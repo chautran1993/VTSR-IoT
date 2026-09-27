@@ -23,7 +23,10 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from ultralytics import YOLO
 
-from sign_meanings import meaning_of, short_label
+if __package__:
+    from .sign_meanings import meaning_of, short_label
+else:
+    from sign_meanings import meaning_of, short_label
 
 # ---------------------------------------------------------------------------
 # Ve chu tieng Viet co dau len khung hinh.
@@ -125,7 +128,7 @@ class FrameGrabber:
 # ----------------------------------------------------------------------------
 class MqttPublisher:
     def __init__(self, host="localhost", port=1883, topic="vtsr/edge01/detections",
-                 device_id="edge01", enabled=False):
+                 device_id="edge01", enabled=False, async_connect=False):
         self.enabled = enabled
         self.topic = topic
         self.device_id = device_id
@@ -138,7 +141,10 @@ class MqttPublisher:
                                       client_id=device_id)
         except (AttributeError, TypeError):  # paho-mqtt 1.x
             self.client = mqtt.Client(client_id=device_id)
-        self.client.connect(host, port, keepalive=60)
+        if async_connect:
+            self.client.connect_async(host, port, keepalive=5)
+        else:
+            self.client.connect(host, port, keepalive=60)
         self.client.loop_start()
         print(f"[MQTT] Da ket noi {host}:{port} -> topic '{topic}'")
 
